@@ -1,7 +1,11 @@
 module.exports.profile=function(req,res){
-    return res.end("<h1>User profile</h1>");
+    return res.render('user_post',{
+        title:'user profile'
+    });
 };
 
 module.exports.post=function(req,res){
-    return res.end("<h1>user post</h1>");
+    return res.render('user_post',{
+        title:'user post'
+    });
 };
