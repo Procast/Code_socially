@@ -3,3 +3,13 @@
 <h1>
     code socially / <%=title%>
 </h1>
+
+<p><%=user.name%></p>
+<p><%=user.email%></p>
+
+
+<form action="/users/signout" method="post">
+    <button type="submit">
+        Sign out
+    </button>
+</form>
