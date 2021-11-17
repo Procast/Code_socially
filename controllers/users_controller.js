@@ -2,11 +2,7 @@ const User=require('../models/user');
 
 
 
-module.exports.post=function(req,res){
-    return res.render('user_post',{
-        title:'user post'
-    });
-};
+
 
 module.exports.signup=function(req,res){
     if (req.isAuthenticated()){

@@ -10,7 +10,7 @@ const userController=require('../controllers/users_controller');
 
 router.get('/profile',passport.checkAuthentication,userController.profile);
 
-router.get('/post',passport.checkAuthentication,userController.post);
+
 
 router.get('/signup',userController.signup);
 
