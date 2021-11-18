@@ -11,3 +11,14 @@
 
     </form>
 </section>
+
+<div id="posts-container">
+    <ul>
+        <%for(let i of posts ){%>
+            <p>
+                <li><%=i.content%></li>
+                <%=i.user.name%></p>
+            
+        <%}%>
+    </ul>
+</div>
