@@ -2,8 +2,6 @@ const User=require('../models/user');
 
 
 
-
-
 module.exports.signup=function(req,res){
     if (req.isAuthenticated()){
         return res.redirect("/users/profile");
@@ -74,10 +72,13 @@ module.exports.createUser=function(req,res){
 };
 
 module.exports.createSession=function(req,res){
+    req.flash('success',"Logged in succesfully.");
     return res.redirect('/');
 };
 
 module.exports.destroySession=function(req,res){
+    
     req.logout();
+    req.flash('success',"Logged out succesfully.");
     return res.redirect('/');
 }
