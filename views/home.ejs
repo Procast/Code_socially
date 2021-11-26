@@ -10,17 +10,15 @@
                 <input type="submit" value="Post">
 
             </form>
-            <%}%>
+        <%}%>
 
 
                 <div id="posts-container">
                     <ul>
                         <% for(let i of posts ){ %>
 
-
-                            <%-include('_post', {i: i})-%>
-                                <%-include('_comment', {i: i})-%>
-                                    <% } %>
+                            <%-include('_post',{i:i})-%>
+                        <% } %>
                     </ul>
                 </div>
 
@@ -37,3 +35,8 @@
             <%}%>
     </section>
 </div>
+
+
+<!-- importing this script for creating the comments -->
+<script src="/js/home_post_comments.js" ></script>
+<script src="/js/home_posts.js"></script>

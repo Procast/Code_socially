@@ -33,12 +33,34 @@ module.exports.profile=function(req,res){
     
 };
 
-module.exports.update=function(req,res){
+module.exports.update=async function(req,res){
     if(req.user.id==req.params.id){
-        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+        try{
+            let user=await User.findById(req.params.id);
+            
+            User.uploadedAvatar(req,res,function(err){
+                if (err){console.log('****multer error :',err);return;}
+
+                
+
+
+                user.name=req.body.name;
+                user.email=req.body.email;
+
+                if(req.file){
+                    user.avatar=User.avatarPath + '/'+req.file.filename;
+                }
+
+                user.save();
+                return res.redirect('back');
+            });
+
+        }catch(err){
+            req.flash('error',err);
             return res.redirect('back');
-        });
+        }
     }else{
+        req.flash('error','Not authorized to update');
         return res.status(401).send('Unauthorized');
     }
 }
@@ -62,10 +84,11 @@ module.exports.createUser=function(req,res){
                     console.log("error in creating user while signing up");
                     return;
                 }
-
+                req.flash('success','Sign up is successfull');
                 return res.redirect('/users/signin');
             });
         }else{
+            req.flash('error','Error in sign up');
             return res.redirect('back');
         }
     })

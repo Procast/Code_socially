@@ -1,32 +1,15 @@
 
-        <div class="post-comments">
-            <%if (locals.user){%>
-                <form action="/comments/create" method="POST">
-                    <input type="text" name="content" placeholder="Enter comments" required>
-                    <input type="hidden" name="postid" value="<%=i._id%>">
-                    <input type="submit" value="Add comment">
-                </form>
-                
-            <%}%>
-                
-            
-            <div class="post-comments-list">
-                <ul id="post-comments-<%=i._id %>">
-                    <%for (let comment of i.comments){%>
-                            
-                            <P>
-                                <%if (locals.user && locals.user.id ==comment.user.id){ %>
-                                    <small>
-                                        <a href="/comments/destroy/<%=comment.id%>">X</a>
-                                    </small>
-                                <%}%>
-                                <%=comment.content%>
-                                <br>
-                                <small>
-                                    <%= comment.user.name%>
-                                </small>
-                            </P>
-                    <%}%>
-                </ul>
-            </div>
-        </div>
+    <li>
+    <p>
+        <%if (locals.user && locals.user.id==comment.user.id){ %>
+            <small>
+                <a class="delete-comment-button" href="/comments/destroy/<%=comment.id%>">X</a>
+            </small>
+        <%}%>
+        <%=comment.content%>
+        <br>
+        <small>
+            <%= comment.user.name%>
+        </small>
+    </p>
+    </li>

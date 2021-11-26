@@ -1,11 +1,38 @@
-<p>
-                
-    <li>
-    <%if (locals.user && locals.user.id == i.user.id){ %>
-    <small>
-        <a href="/posts/destroy/<%=i.id%>">X</a>
-    </small>
+<li id="post-<%=i._id%>">
+    <p>
+        <%if (locals.user && locals.user.id==i.user.id){ %>
+            <small>
+                <a class="delete-post-button" href="/posts/destroy/<%=i.id%>">X</a>
+            </small>
+        <%}%>
+        <%=i.content%>
+        <br>
+        <%=i.user.name%>
+    </p>
+
+
+
+<div class="post-comments">
+    <%if (locals.user){%>
+        <form action="/comments/create" method="POST">
+            <input type="text" name="content" placeholder="Enter comments" required>
+            <input type="hidden" name="postid" value="<%=i._id%>">
+            <input type="submit" value="Add comment">
+        </form>
+
     <%}%>
-    <%=i.content%></li>
-    <%=i.user.name%>
-</p>
+
+
+    <div class="post-comments-list">
+        <ul id="post-comments-<%=i._id %>">
+            <%for (let comment of i.comments){%>
+                <%-include('_comment',{comment:comment})-%>
+            <%}%>
+           
+        </ul>
+    </div>
+</div>
+</li>
+
+
+ 
